@@ -3,6 +3,7 @@ package kafka.generator;
 
 import kafka.generator.domain.Order;
 import kafka.generator.domain.OrderGenerator;
+import kafka.generator.domain.Utils;
 import kafka.generator.properties.AppProperties;
 import kafka.generator.serializer.Mapper;
 import org.apache.kafka.clients.producer.KafkaProducer;
@@ -26,7 +27,7 @@ public final class Producer {
     public static void main(String[] args) {
          //setup
          Properties properties = AppProperties.setup();
-
+         Utils utils = new Utils();
         // create a producer
         KafkaProducer<String, Order> producer = new KafkaProducer<>(properties);
 
@@ -34,12 +35,12 @@ public final class Producer {
         for (;;) {
             //generate random e-commerce order and key for the purpose of demonstration
             Order order =  OrderGenerator.generateOrder();
-            String key = jsonKey();
+            String key = utils.jsonUUID();
 
             //publish to kafka the order
             producer.send(new ProducerRecord(TOPIC_NAME, key, Mapper.jsonNode(order)));
 
-            logger.info("Message sent: Key:" + key+", value: "+order.jsonRepresentation());
+            logger.info("Message sent: Key:" + key+", value: "+utils.jsonRepresentation(order));
 
             try {
                 Thread.sleep(500);
@@ -49,12 +50,4 @@ public final class Producer {
         }
 
     }
-
-    //generate a key as a valid JSON string
-    private static String jsonKey(){
-        return "\""+UUID.randomUUID().toString()+"\"";
-    }
-
-
-
 }

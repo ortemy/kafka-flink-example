@@ -29,13 +29,5 @@ public class Order {
     private String description;
 
 
-    public String jsonRepresentation(){
-      JSONObject order = new JSONObject();
-      order.put("order_timestamp",order_timestamp);
-      order.put("amount",amount);
-      order.put("country",country);
-      order.put("description",description);
-      return order.toString() ;
 
-    }
 }
