@@ -14,7 +14,8 @@ import org.slf4j.LoggerFactory;
 import java.util.Map;
 import java.util.Properties;
 import java.util.UUID;
-import static kafka.generator.properties.Constants.*;
+
+import static kafka.generator.properties.AppProperties.TOPIC_NAME;
 
 
 /*

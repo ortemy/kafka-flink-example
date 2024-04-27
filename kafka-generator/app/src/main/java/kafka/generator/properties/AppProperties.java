@@ -5,10 +5,14 @@ import org.apache.kafka.common.serialization.StringSerializer;
 
 import java.util.Properties;
 
-import static kafka.generator.properties.Constants.*;
 
 public class AppProperties {
 
+    public static final String  TRUSTSTORE_PASSWORD = "Password123";
+    public static final String  KEYSTORE_PASSWORD = "Password123";
+    public static final String  KEY_PASSWORD = "Password123";
+    public static final String  TOPIC_NAME  = "orders";
+    //OVERRIDE THESE VALUES FOR YOUR ENV
     public static Properties setup(){
         java.util.Properties properties = new java.util.Properties();
         properties.setProperty("bootstrap.servers", "kafka-2f088c05-artem-ea11.h.aivencloud.com:23351");
